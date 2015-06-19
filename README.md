@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/colszowka/phantomjs-gem.png?branch=master)](https://travis-ci.org/colszowka/phantomjs-gem)
 
+**NOTE: This is fork for phantomjs 2.0.0 binary using**
+
 **DISCLAIMER: Alpha status, YMMV!**
 
 I am lazy as hell, and wanted to be able to install [PhantomJS](http://phantomjs.org) via Rubygems/Bundler when using [poltergeist](https://github.com/jonleighton/poltergeist).
