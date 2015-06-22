@@ -66,9 +66,12 @@ module Phantomjs
           end
 
           # Find the phantomjs build we just extracted
-          extracted_dir = Dir['phantomjs*'].find { |path| File.directory?(path) }
+          extracted_dir = Dir['phantomjs*'].find { |path| File.basename(package_url) != File.basename(path) }
 
           # Move the extracted phantomjs build to $HOME/.phantomjs/version/platform
+          if File.file?(extracted_dir)
+            FileUtils.mkdir_p File.join(Phantomjs.base_dir, platform)
+          end
           if FileUtils.mv extracted_dir, File.join(Phantomjs.base_dir, platform)
             STDOUT.puts "\nSuccessfully installed phantomjs. Yay!"
           end
@@ -127,6 +130,14 @@ module Phantomjs
 
         def platform
           'darwin'
+        end
+
+        def phantomjs_path
+          if system_phantomjs_installed?
+            system_phantomjs_path
+          else
+            File.expand_path File.join(Phantomjs.base_dir, platform, 'phantomjs')
+          end
         end
 
         def package_url
